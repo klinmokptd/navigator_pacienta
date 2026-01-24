@@ -86,7 +86,8 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             border: 1px solid var(--border);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            height: 100%;
+            height: auto;
+            cursor: pointer;
         }
         
         .card:hover {
@@ -94,21 +95,55 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
         
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            position: relative;
+            padding-right: 30px;
+        }
+        
+        .card-header:hover .card-arrow {
+            transform: translateX(5px);
+        }
+        
         .card-icon {
             font-size: 2.5rem;
-            margin-bottom: 20px;
+            margin-right: 15px;
             color: var(--primary);
         }
         
-        .card h2 {
+        .card-title {
             font-size: 1.5rem;
-            margin-bottom: 20px;
             color: var(--primary);
             font-weight: 600;
+            flex-grow: 1;
+        }
+        
+        .card-arrow {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s ease;
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+        
+        .card.expanded .card-arrow {
+            transform: translateY(-50%) rotate(180deg);
         }
         
         .link-list {
             list-style: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        
+        .card.expanded .link-list {
+            max-height: 1000px;
         }
         
         .link-item {
@@ -129,23 +164,26 @@
             color: var(--primary);
         }
         
-        .link-item.disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            border-left-color: var(--text-light);
-        }
-        
         /* Стили для выпадающих списков в нормативной базе */
         .dropdown-toggle {
             cursor: pointer;
             position: relative;
+            padding-right: 20px;
         }
         
         .dropdown-toggle::after {
             content: '▼';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
             font-size: 0.8rem;
-            margin-left: 8px;
             color: var(--text-light);
+            transition: transform 0.3s ease;
+        }
+        
+        .dropdown-toggle.expanded::after {
+            transform: translateY(-50%) rotate(180deg);
         }
         
         .dropdown-content {
@@ -265,6 +303,10 @@
             .phone-number {
                 font-size: 1.5rem;
             }
+            
+            .card-title {
+                font-size: 1.3rem;
+            }
         }
     </style>
 </head>
@@ -288,173 +330,202 @@
     
     <div class="grid">
         <!-- 1. Структура учреждения -->
-        <div class="card">
-            <div class="card-icon">🏢</div>
-            <h2>1. Структура учреждения</h2>
+        <div class="card" onclick="toggleCard(this)">
+            <div class="card-header">
+                <div class="card-icon">🏢</div>
+                <div class="card-title">1. Структура учреждения</div>
+                <div class="card-arrow">▼</div>
+            </div>
             <div class="link-list">
-                <a href="#" class="link-item disabled">Отделения и кабинеты</a>
-                <a href="#" class="link-item disabled">Наши врачи</a>
-                <a href="#" class="link-item disabled">Администрация</a>
-                <a href="#" class="link-item disabled">Схема проезда</a>
+                <a href="#" class="link-item">Отделения и кабинеты</a>
+                <a href="#" class="link-item">Наши врачи</a>
+                <a href="#" class="link-item">Администрация</a>
+                <a href="#" class="link-item">Схема проезда</a>
             </div>
         </div>
         
         <!-- 2. О нашем учреждении -->
-        <div class="card">
-            <div class="card-icon">🏥</div>
-            <h2>2. О нашем учреждении</h2>
+        <div class="card" onclick="toggleCard(this)">
+            <div class="card-header">
+                <div class="card-icon">🏥</div>
+                <div class="card-title">2. О нашем учреждении</div>
+                <div class="card-arrow">▼</div>
+            </div>
             <div class="link-list">
-                <a href="#" class="link-item disabled">Миссия и ценности</a>
-                <a href="#" class="link-item disabled">Лицензии и сертификаты</a>
-                <a href="#" class="link-item disabled">Правила посещения</a>
-                <a href="#" class="link-item disabled">Часы работы отделений</a>
-                <a href="#" class="link-item disabled">Запись на приём (онлайн)</a>
-                <a href="#" class="link-item disabled">Запись на приём (телефон)</a>
+                <a href="#" class="link-item">Миссия и ценности</a>
+                <a href="#" class="link-item">Лицензии и сертификаты</a>
+                <a href="#" class="link-item">Правила посещения</a>
+                <a href="#" class="link-item">Часы работы отделений</a>
+                <a href="#" class="link-item">Запись на приём (онлайн)</a>
+                <a href="#" class="link-item">Запись на приём (телефон)</a>
             </div>
         </div>
         
         <!-- 3. Если вы впервые здесь -->
-        <div class="card">
-            <div class="card-icon">📋</div>
-            <h2>3. Если вы впервые здесь</h2>
+        <div class="card" onclick="toggleCard(this)">
+            <div class="card-header">
+                <div class="card-icon">📋</div>
+                <div class="card-title">3. Если вы впервые здесь</div>
+                <div class="card-arrow">▼</div>
+            </div>
             <div class="link-list">
-                <a href="#" class="link-item disabled">Что взять с собой?</a>
-                <a href="#" class="link-item disabled">Документы для оформления</a>
-                <a href="#" class="link-item disabled">Как пройти в регистратуру</a>
-                <a href="#" class="link-item disabled">Схема кабинетов</a>
-                <a href="#" class="link-item disabled">Первичный приём: что ждать?</a>
+                <a href="#" class="link-item">Что взять с собой?</a>
+                <a href="#" class="link-item">Документы для оформления</a>
+                <a href="#" class="link-item">Как пройти в регистратуру</a>
+                <a href="#" class="link-item">Схема кабинетов</a>
+                <a href="#" class="link-item">Первичный приём: что ждать?</a>
             </div>
         </div>
         
         <!-- 4. О туберкулёзе -->
-        <div class="card">
-            <div class="card-icon">💊</div>
-            <h2>4. О туберкулёзе</h2>
+        <div class="card" onclick="toggleCard(this)">
+            <div class="card-header">
+                <div class="card-icon">💊</div>
+                <div class="card-title">4. О туберкулёзе</div>
+                <div class="card-arrow">▼</div>
+            </div>
             <div class="link-list">
-                <a href="#" class="link-item disabled">Что такое туберкулёз?</a>
-                <a href="#" class="link-item disabled">Как передаётся?</a>
-                <a href="#" class="link-item disabled">Мифы и правда</a>
-                <a href="#" class="link-item disabled">Важность лечения</a>
-                <a href="#" class="link-item disabled">Профилактика</a>
+                <a href="#" class="link-item">Что такое туберкулёз?</a>
+                <a href="#" class="link-item">Как передаётся?</a>
+                <a href="#" class="link-item">Мифы и правда</a>
+                <a href="#" class="link-item">Важность лечения</a>
+                <a href="#" class="link-item">Профилактика</a>
             </div>
         </div>
         
         <!-- 5. Лечение -->
-        <div class="card">
-            <div class="card-icon">📅</div>
-            <h2>5. Лечение</h2>
+        <div class="card" onclick="toggleCard(this)">
+            <div class="card-header">
+                <div class="card-icon">📅</div>
+                <div class="card-title">5. Лечение</div>
+                <div class="card-arrow">▼</div>
+            </div>
             <div class="link-list">
-                <a href="#" class="link-item disabled">Как правильно принимать лекарства</a>
-                <a href="#" class="link-item disabled">Что делать, если пропустил приём</a>
-                <a href="#" class="link-item disabled">Побочные эффекты</a>
-                <a href="#" class="link-item disabled">Как справляться с побочными эффектами</a>
-                <a href="#" class="link-item disabled">Дневник самочувствия</a>
+                <a href="#" class="link-item">Как правильно принимать лекарства</a>
+                <a href="#" class="link-item">Что делать, если пропустил приём</a>
+                <a href="#" class="link-item">Побочные эффекты</a>
+                <a href="#" class="link-item">Как справляться с побочными эффектами</a>
+                <a href="#" class="link-item">Дневник самочувствия</a>
             </div>
         </div>
         
         <!-- 6. Диагностика и анализы -->
-        <div class="card">
-            <div class="card-icon">🩺</div>
-            <h2>6. Диагностика и анализы</h2>
+        <div class="card" onclick="toggleCard(this)">
+            <div class="card-header">
+                <div class="card-icon">🩺</div>
+                <div class="card-title">6. Диагностика и анализы</div>
+                <div class="card-arrow">▼</div>
+            </div>
             <div class="link-list">
-                <a href="#" class="link-item disabled">Какие анализы нужно сдавать</a>
-                <a href="#" class="link-item disabled">Как подготовиться к анализам</a>
-                <a href="#" class="link-item disabled">Где сдать анализы</a>
-                <a href="#" class="link-item disabled">Когда готовы результаты</a>
-                <a href="#" class="link-item disabled">Как получить результаты</a>
+                <a href="#" class="link-item">Какие анализы нужно сдавать</a>
+                <a href="#" class="link-item">Как подготовиться к анализам</a>
+                <a href="#" class="link-item">Где сдать анализы</a>
+                <a href="#" class="link-item">Когда готовы результаты</a>
+                <a href="#" class="link-item">Как получить результаты</a>
             </div>
         </div>
         
         <!-- 7. Частые вопросы (FAQ) -->
-        <div class="card">
-            <div class="card-icon">❓</div>
-            <h2>7. Частые вопросы (FAQ)</h2>
+        <div class="card" onclick="toggleCard(this)">
+            <div class="card-header">
+                <div class="card-icon">❓</div>
+                <div class="card-title">7. Частые вопросы (FAQ)</div>
+                <div class="card-arrow">▼</div>
+            </div>
             <div class="link-list">
-                <a href="#" class="link-item disabled">Можно ли работать?</a>
-                <a href="#" class="link-item disabled">Как обезопасить близких?</a>
-                <a href="#" class="link-item disabled">Питание и диета</a>
-                <a href="#" class="link-item disabled">Спорт и физическая активность</a>
-                <a href="#" class="link-item disabled">Бесплатно ли лечение?</a>
-                <a href="#" class="link-item disabled">Больничный лист</a>
+                <a href="#" class="link-item">Можно ли работать?</a>
+                <a href="#" class="link-item">Как обезопасить близких?</a>
+                <a href="#" class="link-item">Питание и диета</a>
+                <a href="#" class="link-item">Спорт и физическая активность</a>
+                <a href="#" class="link-item">Бесплатно ли лечение?</a>
+                <a href="#" class="link-item">Больничный лист</a>
             </div>
         </div>
         
-        <!-- 8. Нормативная база (С выпадающими списками) -->
-<div class="card">
-    <div class="card-icon">⚖️</div>
-    <h2>8. Нормативная база</h2>
-    <div class="link-list">
-        
-        <!-- Документ 1: Московская областная программа -->
-        <div class="link-item dropdown-toggle" onclick="toggleDropdown('doc1')">
-            Московская областная программа госгарантий
-        </div>
-        <div class="dropdown-content" id="dropdown-doc1">
-            <a href="http://publication.pravo.gov.ru/document/5000202601200001" class="dropdown-item" target="_blank">
-                <span class="dropdown-item-icon">📄</span>
-                <span class="legal-text">Ссылка на официальный документ</span>
-            </a>
-            <a href="https://mz.mosreg.ru/download/document/17665583" class="dropdown-item" target="_blank">
-                <span class="dropdown-item-icon">💡</span>
-                <span class="explanation-text">Разъяснения простыми словами</span>
-            </a>
-        </div>
-        
-        <!-- Документ 2: Федеральная программа -->
-        <div class="link-item dropdown-toggle" onclick="toggleDropdown('doc2')">
-            Программа госгарантий Российской Федерации
-        </div>
-        <div class="dropdown-content" id="dropdown-doc2">
-            <a href="http://actual.pravo.gov.ru/content/content.html#pnum=0001202512300036" class="dropdown-item" target="_blank">
-                <span class="dropdown-item-icon">📄</span>
-                <span class="legal-text">Ссылка на официальный документ</span>
-            </a>
-            <a href="#" class="dropdown-item disabled">
-                <span class="dropdown-item-icon">💡</span>
-                <span class="explanation-text">Разъяснения простыми словами</span>
-            </a>
-        </div>
-        
-        <!-- Документ 3: ФЗ-323 -->
-        <div class="link-item dropdown-toggle" onclick="toggleDropdown('doc3')">
-            ФЗ-323 "Об основах охраны здоровья"
-        </div>
-        <div class="dropdown-content" id="dropdown-doc3">
-            <a href="https://minzdrav.gov.ru/documents/7025" class="dropdown-item" target="_blank">
-                <span class="dropdown-item-icon">📄</span>
-                <span class="legal-text">Ссылка на официальный документ</span>
-            </a>
-            <a href="fz323.html" class="dropdown-item">
-                <span class="dropdown-item-icon">💡</span>
-                <span class="explanation-text">Разъяснения простыми словами</span>
-            </a>
-        </div>
-        
-    </div>
-</div>
-        <!-- 9. Полезные материалы -->
-        <div class="card">
-            <div class="card-icon">📚</div>
-            <h2>9. Полезные материалы</h2>
+        <!-- 8. Нормативная база -->
+        <div class="card" onclick="toggleCard(this)">
+            <div class="card-header">
+                <div class="card-icon">⚖️</div>
+                <div class="card-title">8. Нормативная база</div>
+                <div class="card-arrow">▼</div>
+            </div>
             <div class="link-list">
-                <a href="#" class="link-item disabled">Брошюры и памятки (PDF)</a>
-                <a href="#" class="link-item disabled">Видеоразъяснения врачей</a>
-                <a href="#" class="link-item disabled">Сайт ВОЗ о туберкулёзе</a>
-                <a href="#" class="link-item disabled">Сайт Минздрава России</a>
-                <a href="#" class="link-item disabled">Рекомендуемая литература</a>
+                <!-- Документ 1: Московская областная программа -->
+                <div class="link-item dropdown-toggle" onclick="toggleDropdown('doc1', event)">
+                    Московская областная программа госгарантий
+                </div>
+                <div class="dropdown-content" id="dropdown-doc1">
+                    <a href="http://publication.pravo.gov.ru/document/5000202601200001" class="dropdown-item" target="_blank">
+                        <span class="dropdown-item-icon">📄</span>
+                        <span class="legal-text">Ссылка на официальный документ</span>
+                    </a>
+                    <a href="https://mz.mosreg.ru/download/document/17665583" class="dropdown-item" target="_blank">
+                        <span class="dropdown-item-icon">💡</span>
+                        <span class="explanation-text">Разъяснения простыми словами</span>
+                    </a>
+                </div>
+                
+                <!-- Документ 2: Федеральная программа -->
+                <div class="link-item dropdown-toggle" onclick="toggleDropdown('doc2', event)">
+                    Программа госгарантий Российской Федерации
+                </div>
+                <div class="dropdown-content" id="dropdown-doc2">
+                    <a href="http://actual.pravo.gov.ru/content/content.html#pnum=0001202512300036" class="dropdown-item" target="_blank">
+                        <span class="dropdown-item-icon">📄</span>
+                        <span class="legal-text">Ссылка на официальный документ</span>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <span class="dropdown-item-icon">💡</span>
+                        <span class="explanation-text">Разъяснения простыми словами</span>
+                    </a>
+                </div>
+                
+                <!-- Документ 3: ФЗ-323 -->
+                <div class="link-item dropdown-toggle" onclick="toggleDropdown('doc3', event)">
+                    ФЗ-323 "Об основах охраны здоровья"
+                </div>
+                <div class="dropdown-content" id="dropdown-doc3">
+                    <a href="https://minzdrav.gov.ru/documents/7025" class="dropdown-item" target="_blank">
+                        <span class="dropdown-item-icon">📄</span>
+                        <span class="legal-text">Ссылка на официальный документ</span>
+                    </a>
+                    <a href="fz323.html" class="dropdown-item">
+                        <span class="dropdown-item-icon">💡</span>
+                        <span class="explanation-text">Разъяснения простыми словами</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 9. Полезные материалы -->
+        <div class="card" onclick="toggleCard(this)">
+            <div class="card-header">
+                <div class="card-icon">📚</div>
+                <div class="card-title">9. Полезные материалы</div>
+                <div class="card-arrow">▼</div>
+            </div>
+            <div class="link-list">
+                <a href="#" class="link-item">Брошюры и памятки (PDF)</a>
+                <a href="#" class="link-item">Видеоразъяснения врачей</a>
+                <a href="#" class="link-item">Сайт ВОЗ о туберкулёзе</a>
+                <a href="#" class="link-item">Сайт Минздрава России</a>
+                <a href="#" class="link-item">Рекомендуемая литература</a>
             </div>
         </div>
         
         <!-- 10. Обратная связь -->
-        <div class="card">
-            <div class="card-icon">💬</div>
-            <h2>10. Обратная связь</h2>
+        <div class="card" onclick="toggleCard(this)">
+            <div class="card-header">
+                <div class="card-icon">💬</div>
+                <div class="card-title">10. Обратная связь</div>
+                <div class="card-arrow">▼</div>
+            </div>
             <div class="link-list">
-                <a href="#" class="link-item disabled">Анонимный опрос</a>
-                <a href="#" class="link-item disabled">Предложения по улучшению</a>
-                <a href="#" class="link-item disabled">Вопрос врачу (не экстренный)</a>
-                <a href="#" class="link-item disabled">Книга жалоб и предложений</a>
-                <a href="#" class="link-item disabled">Горячая линия Минздрава</a>
+                <a href="#" class="link-item">Анонимный опрос</a>
+                <a href="#" class="link-item">Предложения по улучшению</a>
+                <a href="#" class="link-item">Вопрос врачу (не экстренный)</a>
+                <a href="#" class="link-item">Книга жалоб и предложений</a>
+                <a href="#" class="link-item">Горячая линия Минздрава</a>
             </div>
         </div>
     </div>
@@ -468,15 +539,31 @@
     </footer>
     
     <script>
-        // Функция для открытия/закрытия выпадающих списков
-        function toggleDropdown(id) {
+        // Функция для раскрытия/скрытия карточек
+        function toggleCard(card) {
+            card.classList.toggle('expanded');
+        }
+        
+        // Функция для открытия/закрытия выпадающих списков в нормативной базе
+        function toggleDropdown(id, event) {
+            event.stopPropagation(); // Останавливаем всплытие, чтобы не закрывать карточку
             const dropdown = document.getElementById('dropdown-' + id);
+            const toggle = event.currentTarget;
+            
+            toggle.classList.toggle('expanded');
             dropdown.classList.toggle('show');
             
             // Закрываем другие открытые dropdown
             document.querySelectorAll('.dropdown-content').forEach(item => {
                 if (item.id !== 'dropdown-' + id && item.classList.contains('show')) {
                     item.classList.remove('show');
+                }
+            });
+            
+            // Сбрасываем класс expanded у других toggle
+            document.querySelectorAll('.dropdown-toggle').forEach(item => {
+                if (item !== toggle && item.classList.contains('expanded')) {
+                    item.classList.remove('expanded');
                 }
             });
         }
@@ -488,16 +575,10 @@
                 document.querySelectorAll('.dropdown-content.show').forEach(item => {
                     item.classList.remove('show');
                 });
+                document.querySelectorAll('.dropdown-toggle.expanded').forEach(item => {
+                    item.classList.remove('expanded');
+                });
             }
-        });
-        
-        // Сообщение для заглушек
-        document.querySelectorAll('.link-item.disabled, .dropdown-item.disabled').forEach(item => {
-            item.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                alert('Этот раздел находится в разработке. Скоро здесь появится полезная информация!');
-            });
         });
     </script>
 </body>

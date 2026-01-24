@@ -337,9 +337,24 @@
         <div class="card-arrow">▼</div>
     </div>
     <div class="link-list">
-         <a href="missia.html" class="link-item">Миссия и ценности</a>
-        <a href="raspisanie.html" class="link-item">Расписание приёма врачей и кабинетов</a>
-        <a href="https://zdrav.mosreg.ru/start" class="link-item">Запись на приём (онлайн)</a>
+        <a href="missia.html" class="link-item">Миссия и ценности</a>
+        
+        <!-- Расписание с выпадающим списком -->
+        <div class="link-item dropdown-toggle" onclick="toggleDropdown('schedule', event)">
+            Расписание приёма врачей и кабинетов
+        </div>
+        <div class="dropdown-content" id="dropdown-schedule">
+            <a href="raspisanie.html" class="dropdown-item">
+                <span class="dropdown-item-icon">📍</span>
+                <span class="legal-text">Клинский филиал</span>
+            </a>
+            <a href="raspisanie_khimki.html" class="dropdown-item">
+                <span class="dropdown-item-icon">📍</span>
+                <span class="legal-text">Химкинский филиал</span>
+            </a>
+        </div>
+        
+        <a href="https://zdrav.mosreg.ru/start" class="link-item" target="_blank">Запись на приём (онлайн)</a>
     </div>
 </div>
         

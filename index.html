@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Навигатор пациента | ГБУЗ МО МОКПТД филиал Клинский</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -61,52 +61,59 @@
         
         .contact-block {
             background: white;
-            padding: 30px;
-            border-radius: 12px;
+            padding: 35px;
+            border-radius: 16px;
             margin: 30px 0;
             text-align: center;
-            border: 2px solid var(--primary);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 3px solid var(--primary);
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.15);
         }
         
         .contact-text {
-            font-size: 1.2rem;
-            color: var(--text);
-            margin-bottom: 15px;
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 20px;
             line-height: 1.5;
+            font-weight: 800;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(46, 125, 50, 0.2);
+            letter-spacing: 0.5px;
         }
         
         .contact-name {
-            font-size: 1.3rem;
-            color: var(--primary);
-            font-weight: 600;
-            margin: 15px 0 5px 0;
+            font-size: 1.5rem;
+            color: #000000;
+            font-weight: 700;
+            margin: 20px 0 8px 0;
         }
         
         .contact-position {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: var(--text-light);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            font-weight: 500;
         }
         
         .phone-link {
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: var(--primary);
-            font-weight: 700;
+            font-weight: 800;
             text-decoration: none;
             display: inline-block;
-            padding: 10px 20px;
-            border: 2px solid var(--primary);
-            border-radius: 8px;
+            padding: 12px 25px;
+            border: 3px solid var(--primary);
+            border-radius: 10px;
             transition: all 0.3s ease;
             margin-top: 10px;
+            background: var(--primary-light);
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.1);
         }
         
         .phone-link:hover {
             background: var(--primary);
             color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(46, 125, 50, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(46, 125, 50, 0.25);
         }
         
         .grid {
@@ -299,16 +306,29 @@
                 padding: 20px;
             }
             
+            .contact-block {
+                padding: 25px;
+            }
+            
+            .contact-text {
+                font-size: 1.3rem;
+                font-weight: 800;
+            }
+            
             .phone-link {
-                font-size: 1.5rem;
-                padding: 8px 15px;
+                font-size: 1.6rem;
+                padding: 10px 20px;
             }
             
             .card-title {
                 font-size: 1.3rem;
             }
             
-            .contact-text {
+            .contact-name {
+                font-size: 1.3rem;
+            }
+            
+            .contact-position {
                 font-size: 1.1rem;
             }
         }
@@ -322,7 +342,7 @@
     </header>
     
     <div class="contact-block">
-        <div class="contact-text">В случае возникновения любых проблем сразу обращайтесь лично ко мне</div>
+        <div class="contact-text">В случае возникновения любых проблем сразу обращайтесь лично ко мне!</div>
         <div class="contact-name">Лукаш Игорь Александрович</div>
         <div class="contact-position">Заведующий филиалом</div>
         <a href="tel:+79153861585" class="phone-link">+7 (915) 386-15-85</a>
@@ -330,33 +350,33 @@
     
     <div class="grid">
         <!-- О нашем учреждении -->
-<div class="card" onclick="toggleCard(this)">
-    <div class="card-header">
-        <div class="card-icon">🏥</div>
-        <div class="card-title">О нашем учреждении</div>
-        <div class="card-arrow">▼</div>
-    </div>
-    <div class="link-list">
-        <a href="missia.html" class="link-item">Миссия и ценности</a>
-        
-        <!-- Расписание с выпадающим списком -->
-        <div class="link-item dropdown-toggle" onclick="toggleDropdown('schedule', event)">
-            Расписание приёма врачей и кабинетов
+        <div class="card" onclick="toggleCard(this)">
+            <div class="card-header">
+                <div class="card-icon">🏥</div>
+                <div class="card-title">О нашем учреждении</div>
+                <div class="card-arrow">▼</div>
+            </div>
+            <div class="link-list">
+                <a href="missia.html" class="link-item">Миссия и ценности</a>
+                
+                <!-- Расписание с выпадающим списком -->
+                <div class="link-item dropdown-toggle" onclick="toggleDropdown('schedule', event)">
+                    Расписание приёма врачей и кабинетов
+                </div>
+                <div class="dropdown-content" id="dropdown-schedule">
+                    <a href="raspisanie.html" class="dropdown-item">
+                        <span class="dropdown-item-icon">📍</span>
+                        <span class="legal-text">Клинское отделение</span>
+                    </a>
+                    <a href="raspisanie_khimki.html" class="dropdown-item">
+                        <span class="dropdown-item-icon">📍</span>
+                        <span class="legal-text">Химкинское отделение</span>
+                    </a>
+                </div>
+                
+                <a href="https://zdrav.mosreg.ru/start" class="link-item" target="_blank">Запись на приём (онлайн)</a>
+            </div>
         </div>
-        <div class="dropdown-content" id="dropdown-schedule">
-            <a href="raspisanie.html" class="dropdown-item">
-                <span class="dropdown-item-icon">📍</span>
-                <span class="legal-text">Клинское отделение</span>
-            </a>
-            <a href="raspisanie_khimki.html" class="dropdown-item">
-                <span class="dropdown-item-icon">📍</span>
-                <span class="legal-text">Химкинское отделение</span>
-            </a>
-        </div>
-        
-        <a href="https://zdrav.mosreg.ru/start" class="link-item" target="_blank">Запись на приём (онлайн)</a>
-    </div>
-</div>
         
         <!-- О туберкулёзе -->
         <div class="card" onclick="toggleCard(this)">
@@ -383,17 +403,17 @@
         </div>
         
         <!-- Консервативное лечение -->
-<div class="card" onclick="toggleCard(this)">
-    <div class="card-header">
-        <div class="card-icon">💊</div>
-        <div class="card-title">Консервативное лечение</div>
-        <div class="card-arrow">▼</div>
-    </div>
-    <div class="link-list">
-        <a href="https://klinmokptd.github.io/Pacientam_o_preparatax/" target="_blank" class="link-item">Как правильно принимать лекарства</a>
-        <a href="nelzya_propuskat.html" class="link-item">Почему нельзя пропускать прием лекарств</a>
-    </div>
-</div>
+        <div class="card" onclick="toggleCard(this)">
+            <div class="card-header">
+                <div class="card-icon">💊</div>
+                <div class="card-title">Консервативное лечение</div>
+                <div class="card-arrow">▼</div>
+            </div>
+            <div class="link-list">
+                <a href="https://klinmokptd.github.io/Pacientam_o_preparatax/" target="_blank" class="link-item">Как правильно принимать лекарства</a>
+                <a href="nelzya_propuskat.html" class="link-item">Почему нельзя пропускать прием лекарств</a>
+            </div>
+        </div>
         
         <!-- Хирургическое лечение -->
         <div class="card" onclick="toggleCard(this)">
@@ -408,86 +428,86 @@
         </div>
         
         <!-- Профилактика и раннее выявление туберкулёза -->
-<div class="card" onclick="toggleCard(this)">
-    <div class="card-header">
-        <div class="card-icon">🛡️</div>
-        <div class="card-title">Профилактика и раннее выявление туберкулёза</div>
-        <div class="card-arrow">▼</div>
-    </div>
-    <div class="link-list">
-        <a href="https://klinmokptd.github.io/informirovanie_v_ochagah_tuberculeza/" class="link-item">Раннее выявление в производственном очаге туберкулёза</a>
-        <a href="https://klinmokptd.github.io/o_profosmotrax_na_tuberkulez/" class="link-item">О профосмотрах на туберкулез</a>
-    </div>
-</div>
+        <div class="card" onclick="toggleCard(this)">
+            <div class="card-header">
+                <div class="card-icon">🛡️</div>
+                <div class="card-title">Профилактика и раннее выявление туберкулёза</div>
+                <div class="card-arrow">▼</div>
+            </div>
+            <div class="link-list">
+                <a href="https://klinmokptd.github.io/informirovanie_v_ochagah_tuberculeza/" class="link-item">Раннее выявление в производственном очаге туберкулёза</a>
+                <a href="https://klinmokptd.github.io/o_profosmotrax_na_tuberkulez/" class="link-item">О профосмотрах на туберкулез</a>
+            </div>
+        </div>
         
         <!-- Частые вопросы -->
-<div class="card">
-    <div class="card-header" onclick="toggleCard(this)">
-        <div class="card-icon">❓</div>
-        <div class="card-title">Частые вопросы</div>
-        <div class="card-arrow">▼</div>
-    </div>
-    <div class="card-content">
-        <div class="link-list">
-            <a href="faq.html" class="link-item" onclick="event.stopPropagation()">Частые вопросы</a>
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                <div class="card-icon">❓</div>
+                <div class="card-title">Частые вопросы</div>
+                <div class="card-arrow">▼</div>
+            </div>
+            <div class="card-content">
+                <div class="link-list">
+                    <a href="faq.html" class="link-item" onclick="event.stopPropagation()">Частые вопросы</a>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
         
         <!-- Нормативная база -->
-<div class="card" onclick="toggleCard(this)">
-    <div class="card-header">
-        <div class="card-icon">⚖️</div>
-        <div class="card-title">Нормативная база</div>
-        <div class="card-arrow">▼</div>
-    </div>
-    <div class="link-list">
-        <!-- Документ 1: Московская областная программа -->
-        <div class="link-item dropdown-toggle" onclick="toggleDropdown('doc1', event)">
-            Московская областная программа госгарантий
+        <div class="card" onclick="toggleCard(this)">
+            <div class="card-header">
+                <div class="card-icon">⚖️</div>
+                <div class="card-title">Нормативная база</div>
+                <div class="card-arrow">▼</div>
+            </div>
+            <div class="link-list">
+                <!-- Документ 1: Московская областная программа -->
+                <div class="link-item dropdown-toggle" onclick="toggleDropdown('doc1', event)">
+                    Московская областная программа госгарантий
+                </div>
+                <div class="dropdown-content" id="dropdown-doc1">
+                    <a href="http://publication.pravo.gov.ru/document/5000202601200001" class="dropdown-item" target="_blank">
+                        <span class="dropdown-item-icon">📄</span>
+                        <span class="legal-text">Ссылка на официальный документ</span>
+                    </a>
+                    <a href="fz323.html" class="dropdown-item">
+                        <span class="dropdown-item-icon">💡</span>
+                        <span class="explanation-text">Разъяснения простыми словами</span>
+                    </a>
+                </div>
+                
+                <!-- Документ 2: Федеральная программа -->
+                <div class="link-item dropdown-toggle" onclick="toggleDropdown('doc2', event)">
+                    Программа госгарантий Российской Федерации
+                </div>
+                <div class="dropdown-content" id="dropdown-doc2">
+                    <a href="http://actual.pravo.gov.ru/content/content.html#pnum=0001202512300036" class="dropdown-item" target="_blank">
+                        <span class="dropdown-item-icon">📄</span>
+                        <span class="legal-text">Ссылка на официальный документ</span>
+                    </a>
+                    <a href="fz323.html" class="dropdown-item">
+                        <span class="dropdown-item-icon">💡</span>
+                        <span class="explanation-text">Разъяснения простыми словами</span>
+                    </a>
+                </div>
+                
+                <!-- Документ 3: ФЗ-323 -->
+                <div class="link-item dropdown-toggle" onclick="toggleDropdown('doc3', event)">
+                    ФЗ-323 "Об основах охраны здоровья"
+                </div>
+                <div class="dropdown-content" id="dropdown-doc3">
+                    <a href="fz323zakon.html" class="dropdown-item">
+                        <span class="dropdown-item-icon">📄</span>
+                        <span class="legal-text">Основной документ</span>
+                    </a>
+                    <a href="fz323.html" class="dropdown-item">
+                        <span class="dropdown-item-icon">💡</span>
+                        <span class="explanation-text">Разъяснения простыми словами</span>
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="dropdown-content" id="dropdown-doc1">
-            <a href="http://publication.pravo.gov.ru/document/5000202601200001" class="dropdown-item" target="_blank">
-                <span class="dropdown-item-icon">📄</span>
-                <span class="legal-text">Ссылка на официальный документ</span>
-            </a>
-            <a href="fz323.html" class="dropdown-item">
-                <span class="dropdown-item-icon">💡</span>
-                <span class="explanation-text">Разъяснения простыми словами</span>
-            </a>
-        </div>
-        
-        <!-- Документ 2: Федеральная программа -->
-        <div class="link-item dropdown-toggle" onclick="toggleDropdown('doc2', event)">
-            Программа госгарантий Российской Федерации
-        </div>
-        <div class="dropdown-content" id="dropdown-doc2">
-            <a href="http://actual.pravo.gov.ru/content/content.html#pnum=0001202512300036" class="dropdown-item" target="_blank">
-                <span class="dropdown-item-icon">📄</span>
-                <span class="legal-text">Ссылка на официальный документ</span>
-            </a>
-            <a href="fz323.html" class="dropdown-item">
-                <span class="dropdown-item-icon">💡</span>
-                <span class="explanation-text">Разъяснения простыми словами</span>
-            </a>
-        </div>
-        
-        <!-- Документ 3: ФЗ-323 -->
-        <div class="link-item dropdown-toggle" onclick="toggleDropdown('doc3', event)">
-            ФЗ-323 "Об основах охраны здоровья"
-        </div>
-        <div class="dropdown-content" id="dropdown-doc3">
-            <a href="fz323zakon.html" class="dropdown-item">
-                <span class="dropdown-item-icon">📄</span>
-                <span class="legal-text">Основной документ</span>
-            </a>
-            <a href="fz323.html" class="dropdown-item">
-                <span class="dropdown-item-icon">💡</span>
-                <span class="explanation-text">Разъяснения простыми словами</span>
-            </a>
-        </div>
-    </div>
-</div>
         
         <!-- Обратная связь -->
         <div class="card" onclick="toggleCard(this)">

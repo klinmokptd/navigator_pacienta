@@ -138,6 +138,7 @@
             font-size: 2rem;
             font-weight: 800;
             letter-spacing: 1px;
+            white-space: nowrap;
         }
         
         .phone-hint {
@@ -303,6 +304,7 @@
             border-top: 1px solid var(--border);
         }
         
+        /* Исправления для мобильной версии */
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2rem;
@@ -326,23 +328,36 @@
             }
             
             .phone-button {
-                font-size: 1.4rem;
-                padding: 15px 30px;
+                font-size: 1.3rem;
+                padding: 16px 24px;
+                border-radius: 50px;
+                flex-direction: column;
+                text-align: center;
+                width: 100%;
+                max-width: 300px;
             }
             
             .phone-icon {
                 width: 50px;
                 height: 50px;
                 font-size: 1.6rem;
-                margin-right: 12px;
+                margin-right: 0;
+                margin-bottom: 10px;
             }
             
             .phone-number {
-                font-size: 1.6rem;
+                font-size: 1.4rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                width: 100%;
+                text-align: center;
             }
             
             .phone-hint {
                 font-size: 0.9rem;
+                margin-top: 10px;
+                color: var(--primary);
             }
             
             .card-title {
@@ -355,6 +370,24 @@
             
             .contact-position {
                 font-size: 1.1rem;
+            }
+        }
+        
+        /* Для очень маленьких экранов */
+        @media (max-width: 400px) {
+            .phone-button {
+                padding: 14px 20px;
+                max-width: 280px;
+            }
+            
+            .phone-number {
+                font-size: 1.2rem;
+            }
+            
+            .phone-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.4rem;
             }
         }
     </style>
@@ -379,6 +412,7 @@
     </div>
     
     <!-- Остальной код остается без изменений -->
+    <!-- [остальной HTML код остается прежним] -->
     <div class="grid">
         <!-- О нашем учреждении -->
         <div class="card" onclick="toggleCard(this)">

@@ -36,29 +36,169 @@
             margin: 0 auto;
         }
         
+        /* === ОБНОВЛЕННЫЙ HEADER С РОМАШКАМИ === */
         .header {
+            position: relative;
             text-align: center;
-            padding: 40px 20px;
+            padding: 50px 20px;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
-            border-radius: 16px;
+            border-radius: 20px;
             margin-bottom: 30px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            overflow: hidden;
+            z-index: 1;
         }
         
+        /* Фоновый узор из ромашек */
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                /* Левая сторона */
+                radial-gradient(circle at 15% 20%, rgba(255,255,255,0.12) 2%, transparent 3%),
+                radial-gradient(circle at 25% 45%, rgba(255,255,255,0.1) 2.5%, transparent 3.5%),
+                radial-gradient(circle at 10% 75%, rgba(255,255,255,0.15) 1.8%, transparent 2.8%),
+                
+                /* Правая сторона */
+                radial-gradient(circle at 85% 25%, rgba(255,255,255,0.1) 2.2%, transparent 3.2%),
+                radial-gradient(circle at 90% 60%, rgba(255,255,255,0.13) 2.4%, transparent 3.4%),
+                radial-gradient(circle at 80% 85%, rgba(255,255,255,0.08) 1.5%, transparent 2.5%),
+                
+                /* Центральная область */
+                radial-gradient(circle at 50% 35%, rgba(255,255,255,0.06) 3%, transparent 4%),
+                radial-gradient(circle at 40% 65%, rgba(255,255,255,0.07) 2%, transparent 3%),
+                radial-gradient(circle at 60% 50%, rgba(255,255,255,0.05) 2.5%, transparent 3.5%);
+            background-size: 100% 100%;
+            z-index: -1;
+            opacity: 0.7;
+        }
+        
+        /* Контурные ромашки по краям */
+        .header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                /* Верхний левый угол */
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='white' stroke-width='0.8' stroke-opacity='0.3'%3E%3Ccircle cx='30' cy='30' r='8'/%3E%3Cpath d='M30,22 L30,38 M22,30 L38,30 M25,25 L35,35 M25,35 L35,25'/%3E%3C/g%3E%3C/svg%3E"),
+                /* Верхний правый угол */
+                url("data:image/svg+xml,%3Csvg width='50' height='50' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='white' stroke-width='0.7' stroke-opacity='0.25'%3E%3Ccircle cx='25' cy='25' r='6'/%3E%3Cpath d='M25,19 L25,31 M19,25 L31,25 M21,21 L29,29 M21,29 L29,21'/%3E%3C/g%3E%3C/svg%3E"),
+                /* Нижний левый угол */
+                url("data:image/svg+xml,%3Csvg width='70' height='70' viewBox='0 0 70 70' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='white' stroke-width='1' stroke-opacity='0.2'%3E%3Ccircle cx='35' cy='35' r='10'/%3E%3Cpath d='M35,25 L35,45 M25,35 L45,35 M28,28 L42,42 M28,42 L42,28'/%3E%3C/g%3E%3C/svg%3E"),
+                /* Нижний правый угол */
+                url("data:image/svg+xml,%3Csvg width='45' height='45' viewBox='0 0 45 45' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='white' stroke-width='0.6' stroke-opacity='0.3'%3E%3Ccircle cx='22.5' cy='22.5' r='5.5'/%3E%3Cpath d='M22.5,17 L22.5,28 M17,22.5 L28,22.5 M19,19 L26,26 M19,26 L26,19'/%3E%3C/g%3E%3C/svg%3E");
+            background-position: 
+                20px 20px,
+                calc(100% - 20px) 20px,
+                20px calc(100% - 20px),
+                calc(100% - 20px) calc(100% - 20px);
+            background-repeat: no-repeat;
+            z-index: -1;
+            opacity: 0.6;
+        }
+        
+        /* Отдельные плавающие ромашки */
+        .daisy {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: 
+                radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, transparent 60%),
+                repeating-conic-gradient(
+                    from 0deg,
+                    rgba(255,255,255,0.9) 0deg 15deg,
+                    transparent 15deg 30deg
+                );
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(1px);
+            opacity: 0.4;
+        }
+        
+        .daisy-1 {
+            top: 15%;
+            left: 10%;
+            width: 35px;
+            height: 35px;
+            transform: rotate(20deg);
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .daisy-2 {
+            top: 25%;
+            right: 15%;
+            width: 45px;
+            height: 45px;
+            transform: rotate(-15deg);
+            opacity: 0.35;
+            animation: float 10s ease-in-out infinite 1s;
+        }
+        
+        .daisy-3 {
+            bottom: 20%;
+            left: 15%;
+            width: 30px;
+            height: 30px;
+            opacity: 0.5;
+            animation: float 12s ease-in-out infinite 2s;
+        }
+        
+        .daisy-4 {
+            bottom: 30%;
+            right: 8%;
+            width: 40px;
+            height: 40px;
+            transform: rotate(30deg);
+            opacity: 0.3;
+            animation: float 9s ease-in-out infinite 3s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(var(--r-start, 0deg));
+            }
+            50% {
+                transform: translateY(-10px) rotate(var(--r-end, 10deg));
+            }
+        }
+        
+        .daisy-1 { --r-start: 20deg; --r-end: 25deg; }
+        .daisy-2 { --r-start: -15deg; --r-end: -10deg; }
+        .daisy-4 { --r-start: 30deg; --r-end: 35deg; }
+        
         .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            font-weight: 700;
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 2;
         }
         
         .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto 10px;
+            position: relative;
+            z-index: 2;
         }
         
+        .header p:last-child {
+            margin-bottom: 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Остальные стили остаются без изменений */
         .contact-block {
             background: white;
             padding: 35px;
@@ -307,7 +447,24 @@
         /* Исправления для мобильной версии */
         @media (max-width: 768px) {
             .header h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+            
+            .header::before {
+                opacity: 0.5;
+            }
+            
+            .header::after {
+                background-size: 40px 40px;
+                opacity: 0.4;
+            }
+            
+            .daisy {
+                display: none;
             }
             
             .grid {
@@ -375,6 +532,10 @@
         
         /* Для очень маленьких экранов */
         @media (max-width: 400px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
             .phone-button {
                 padding: 14px 20px;
                 max-width: 280px;
@@ -394,6 +555,12 @@
 </head>
 <body>
     <header class="header">
+        <!-- Декоративные ромашки -->
+        <div class="daisy daisy-1"></div>
+        <div class="daisy daisy-2"></div>
+        <div class="daisy daisy-3"></div>
+        <div class="daisy daisy-4"></div>
+        
         <h1>Навигатор пациента</h1>
         <p>ГБУЗ МО МОКПТД филиал Клинский</p>
         <p>Вся важная информация в одном месте</p>
@@ -411,8 +578,6 @@
         <div class="phone-hint">Нажмите для звонка</div>
     </div>
     
-    <!-- Остальной код остается без изменений -->
-    <!-- [остальной HTML код остается прежним] -->
     <div class="grid">
         <!-- О нашем учреждении -->
         <div class="card" onclick="toggleCard(this)">

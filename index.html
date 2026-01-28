@@ -304,7 +304,6 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             height: auto;
             cursor: pointer;
-            position: relative;
         }
         
         .card:hover {
@@ -331,17 +330,6 @@
             flex-grow: 1;
         }
         
-        /* Стрелочка для раскрытия карточки */
-        .card-expand-icon {
-            color: var(--text-light);
-            font-size: 1rem;
-            transition: transform 0.3s ease;
-        }
-        
-        .card.expanded .card-expand-icon {
-            transform: rotate(180deg);
-        }
-        
         .link-list {
             list-style: none;
             max-height: 0;
@@ -364,6 +352,7 @@
             border-left: 4px solid var(--primary);
             transition: all 0.2s ease;
             position: relative;
+            padding-right: 40px; /* Место для стрелочки */
         }
         
         .link-item:hover {
@@ -372,29 +361,11 @@
             color: var(--primary);
         }
         
-        /* Стрелочка для обычных ссылок в карточках */
-        .link-item::after {
-            content: '→';
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1rem;
-            color: var(--primary);
-            opacity: 0;
-            transition: all 0.2s ease;
-        }
-        
-        .link-item:hover::after {
-            opacity: 1;
-            right: 12px;
-        }
-        
-        /* Стили для выпадающих списков в нормативной базе */
+        /* СТРЕЛОЧКА ВНИЗ для выпадающих списков */
         .dropdown-toggle {
             cursor: pointer;
             position: relative;
-            padding-right: 40px; /* Место для стрелочки */
+            padding-right: 40px;
         }
         
         .dropdown-toggle::after {
@@ -412,13 +383,22 @@
             transform: translateY(-50%) rotate(180deg);
         }
         
-        /* Убираем стрелочку для выпадающих списков при наведении */
-        .dropdown-toggle::after {
-            content: '▼' !important;
+        /* СТРЕЛОЧКА ССЫЛКИ для обычных ссылок */
+        .link-item:not(.dropdown-toggle)::after {
+            content: '→';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.9rem;
+            color: var(--primary);
+            opacity: 0.6;
+            transition: all 0.2s ease;
         }
         
-        .dropdown-toggle:hover::after {
-            color: var(--primary);
+        .link-item:not(.dropdown-toggle):hover::after {
+            opacity: 1;
+            right: 12px;
         }
         
         .dropdown-content {
@@ -449,6 +429,7 @@
             border-bottom: 1px solid var(--border);
             transition: all 0.2s ease;
             position: relative;
+            padding-right: 40px; /* Место для стрелочки */
         }
         
         .dropdown-item:last-child {
@@ -461,16 +442,16 @@
             padding-left: 20px;
         }
         
-        /* Стрелочка для ссылок в выпадающих списках */
+        /* СТРЕЛОЧКА ССЫЛКИ для элементов в выпадающем списке */
         .dropdown-item::after {
             content: '→';
             position: absolute;
             right: 15px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: var(--primary);
-            opacity: 0;
+            opacity: 0.6;
             transition: all 0.2s ease;
         }
         
@@ -588,16 +569,26 @@
                 font-size: 1.1rem;
             }
             
-            /* Мобильная версия для стрелочек */
-            .link-item::after,
-            .dropdown-item::after {
-                font-size: 0.9rem;
-                right: 10px;
+            /* Мобильные стрелочки */
+            .link-item {
+                padding-right: 35px;
             }
             
-            .link-item:hover::after,
-            .dropdown-item:hover::after {
-                right: 8px;
+            .dropdown-toggle {
+                padding-right: 35px;
+            }
+            
+            .link-item::after,
+            .dropdown-toggle::after {
+                right: 12px;
+            }
+            
+            .dropdown-item {
+                padding-right: 35px;
+            }
+            
+            .dropdown-item::after {
+                right: 12px;
             }
         }
         
@@ -620,14 +611,6 @@
                 width: 45px;
                 height: 45px;
                 font-size: 1.4rem;
-            }
-            
-            .dropdown-toggle {
-                padding-right: 35px;
-            }
-            
-            .dropdown-toggle::after {
-                right: 12px;
             }
         }
     </style>

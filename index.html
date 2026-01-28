@@ -332,17 +332,18 @@
             transform: rotate(180deg);
         }
         
-        /* Стрелочка для карточек-ссылок (прямые ссылки) */
+        /* Стрелочка-ссылка ↗ для карточек-ссылок (прямые ссылки) */
         .card-link .card-header::after {
-            content: '→';
+            content: '↗';
             color: var(--primary);
-            font-size: 1rem;
+            font-size: 1.1rem;
             margin-left: 10px;
+            font-weight: 600;
             transition: transform 0.2s ease;
         }
         
         .card-link:hover .card-header::after {
-            transform: translateX(3px);
+            transform: translate(3px, -3px);
         }
         
         .link-list {

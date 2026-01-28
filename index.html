@@ -293,6 +293,7 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             height: auto;
             cursor: pointer;
+            text-decoration: none !important;
         }
         
         .card:hover {
@@ -317,6 +318,7 @@
             color: var(--primary);
             font-weight: 600;
             flex-grow: 1;
+            text-decoration: none !important;
         }
         
         /* Стрелочка для раскрытия карточки (только для карточек со списками) */
@@ -333,16 +335,28 @@
         }
         
         /* Стрелочка-ссылка ↗ для карточек-ссылок (прямые ссылки) */
-        .card-link .card-header::after {
+        .card-link .card {
+            text-decoration: none !important;
+        }
+        
+        .card-link .card-title {
+            position: relative;
+            padding-right: 25px;
+            text-decoration: none !important;
+        }
+        
+        .card-link .card-title::after {
             content: '↗';
-            color: var(--primary);
+            position: absolute;
+            right: 0;
+            top: 0;
             font-size: 1.1rem;
-            margin-left: 10px;
+            color: var(--primary);
             font-weight: 600;
             transition: transform 0.2s ease;
         }
         
-        .card-link:hover .card-header::after {
+        .card-link:hover .card-title::after {
             transform: translate(3px, -3px);
         }
         
@@ -548,6 +562,10 @@
             
             .contact-position {
                 font-size: 1.1rem;
+            }
+            
+            .card-link .card-title::after {
+                font-size: 1rem;
             }
         }
         

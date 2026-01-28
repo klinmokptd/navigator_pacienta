@@ -36,7 +36,7 @@
             margin: 0 auto;
         }
         
-        /* === ОБНОВЛЕННЫЙ HEADER С РОМАШКАМИ === */
+        /* === HEADER === */
         .header {
             position: relative;
             text-align: center;
@@ -50,7 +50,6 @@
             z-index: 1;
         }
         
-        /* Фоновый узор из ромашек */
         .header::before {
             content: '';
             position: absolute;
@@ -59,17 +58,12 @@
             width: 100%;
             height: 100%;
             background-image: 
-                /* Левая сторона */
                 radial-gradient(circle at 15% 20%, rgba(255,255,255,0.12) 2%, transparent 3%),
                 radial-gradient(circle at 25% 45%, rgba(255,255,255,0.1) 2.5%, transparent 3.5%),
                 radial-gradient(circle at 10% 75%, rgba(255,255,255,0.15) 1.8%, transparent 2.8%),
-                
-                /* Правая сторона */
                 radial-gradient(circle at 85% 25%, rgba(255,255,255,0.1) 2.2%, transparent 3.2%),
                 radial-gradient(circle at 90% 60%, rgba(255,255,255,0.13) 2.4%, transparent 3.4%),
                 radial-gradient(circle at 80% 85%, rgba(255,255,255,0.08) 1.5%, transparent 2.5%),
-                
-                /* Центральная область */
                 radial-gradient(circle at 50% 35%, rgba(255,255,255,0.06) 3%, transparent 4%),
                 radial-gradient(circle at 40% 65%, rgba(255,255,255,0.07) 2%, transparent 3%),
                 radial-gradient(circle at 60% 50%, rgba(255,255,255,0.05) 2.5%, transparent 3.5%);
@@ -78,7 +72,6 @@
             opacity: 0.7;
         }
         
-        /* Контурные ромашки по краям */
         .header::after {
             content: '';
             position: absolute;
@@ -87,13 +80,9 @@
             width: 100%;
             height: 100%;
             background-image: 
-                /* Верхний левый угол */
                 url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='white' stroke-width='0.8' stroke-opacity='0.3'%3E%3Ccircle cx='30' cy='30' r='8'/%3E%3Cpath d='M30,22 L30,38 M22,30 L38,30 M25,25 L35,35 M25,35 L35,25'/%3E%3C/g%3E%3C/svg%3E"),
-                /* Верхний правый угол */
                 url("data:image/svg+xml,%3Csvg width='50' height='50' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='white' stroke-width='0.7' stroke-opacity='0.25'%3E%3Ccircle cx='25' cy='25' r='6'/%3E%3Cpath d='M25,19 L25,31 M19,25 L31,25 M21,21 L29,29 M21,29 L29,21'/%3E%3C/g%3E%3C/svg%3E"),
-                /* Нижний левый угол */
                 url("data:image/svg+xml,%3Csvg width='70' height='70' viewBox='0 0 70 70' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='white' stroke-width='1' stroke-opacity='0.2'%3E%3Ccircle cx='35' cy='35' r='10'/%3E%3Cpath d='M35,25 L35,45 M25,35 L45,35 M28,28 L42,42 M28,42 L42,28'/%3E%3C/g%3E%3C/svg%3E"),
-                /* Нижний правый угол */
                 url("data:image/svg+xml,%3Csvg width='45' height='45' viewBox='0 0 45 45' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='white' stroke-width='0.6' stroke-opacity='0.3'%3E%3Ccircle cx='22.5' cy='22.5' r='5.5'/%3E%3Cpath d='M22.5,17 L22.5,28 M17,22.5 L28,22.5 M19,19 L26,26 M19,26 L26,19'/%3E%3C/g%3E%3C/svg%3E");
             background-position: 
                 20px 20px,
@@ -105,7 +94,6 @@
             opacity: 0.6;
         }
         
-        /* Отдельные плавающие ромашки */
         .daisy {
             position: absolute;
             width: 40px;
@@ -198,7 +186,7 @@
             opacity: 0.9;
         }
         
-        /* Остальные стили остаются без изменений */
+        /* CONTACT BLOCK */
         .contact-block {
             background: white;
             padding: 35px;
@@ -288,6 +276,7 @@
             font-weight: 500;
         }
         
+        /* GRID & CARDS */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -330,6 +319,32 @@
             flex-grow: 1;
         }
         
+        /* Стрелочка для раскрытия карточки (только для карточек со списками) */
+        .card.expandable .card-header::after {
+            content: '▼';
+            color: var(--text-light);
+            font-size: 0.9rem;
+            transition: transform 0.3s ease;
+            margin-left: 10px;
+        }
+        
+        .card.expandable.expanded .card-header::after {
+            transform: rotate(180deg);
+        }
+        
+        /* Стрелочка для карточек-ссылок (прямые ссылки) */
+        .card-link .card-header::after {
+            content: '→';
+            color: var(--primary);
+            font-size: 1rem;
+            margin-left: 10px;
+            transition: transform 0.2s ease;
+        }
+        
+        .card-link:hover .card-header::after {
+            transform: translateX(3px);
+        }
+        
         .link-list {
             list-style: none;
             max-height: 0;
@@ -351,8 +366,6 @@
             color: var(--text);
             border-left: 4px solid var(--primary);
             transition: all 0.2s ease;
-            position: relative;
-            padding-right: 40px; /* Место для стрелочки */
         }
         
         .link-item:hover {
@@ -383,22 +396,8 @@
             transform: translateY(-50%) rotate(180deg);
         }
         
-        /* СТРЕЛОЧКА ССЫЛКИ для обычных ссылок */
-        .link-item:not(.dropdown-toggle)::after {
-            content: '→';
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 0.9rem;
+        .dropdown-toggle:hover::after {
             color: var(--primary);
-            opacity: 0.6;
-            transition: all 0.2s ease;
-        }
-        
-        .link-item:not(.dropdown-toggle):hover::after {
-            opacity: 1;
-            right: 12px;
         }
         
         .dropdown-content {
@@ -428,8 +427,6 @@
             color: var(--text);
             border-bottom: 1px solid var(--border);
             transition: all 0.2s ease;
-            position: relative;
-            padding-right: 40px; /* Место для стрелочки */
         }
         
         .dropdown-item:last-child {
@@ -440,24 +437,6 @@
             background: var(--primary-light);
             color: var(--primary);
             padding-left: 20px;
-        }
-        
-        /* СТРЕЛОЧКА ССЫЛКИ для элементов в выпадающем списке */
-        .dropdown-item::after {
-            content: '→';
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 0.8rem;
-            color: var(--primary);
-            opacity: 0.6;
-            transition: all 0.2s ease;
-        }
-        
-        .dropdown-item:hover::after {
-            opacity: 1;
-            right: 12px;
         }
         
         .dropdown-item-icon {
@@ -476,6 +455,7 @@
             font-style: italic;
         }
         
+        /* FOOTER */
         .footer {
             text-align: center;
             padding: 30px;
@@ -484,7 +464,7 @@
             border-top: 1px solid var(--border);
         }
         
-        /* Исправления для мобильной версии */
+        /* RESPONSIVE */
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2.2rem;
@@ -568,31 +548,8 @@
             .contact-position {
                 font-size: 1.1rem;
             }
-            
-            /* Мобильные стрелочки */
-            .link-item {
-                padding-right: 35px;
-            }
-            
-            .dropdown-toggle {
-                padding-right: 35px;
-            }
-            
-            .link-item::after,
-            .dropdown-toggle::after {
-                right: 12px;
-            }
-            
-            .dropdown-item {
-                padding-right: 35px;
-            }
-            
-            .dropdown-item::after {
-                right: 12px;
-            }
         }
         
-        /* Для очень маленьких экранов */
         @media (max-width: 400px) {
             .header h1 {
                 font-size: 1.8rem;
@@ -617,7 +574,6 @@
 </head>
 <body>
     <header class="header">
-        <!-- Декоративные ромашки -->
         <div class="daisy daisy-1"></div>
         <div class="daisy daisy-2"></div>
         <div class="daisy daisy-3"></div>
@@ -642,50 +598,48 @@
     
     <div class="grid">
         <!-- О нашем учреждении -->
-<div class="card" onclick="toggleCard(this)">
-    <div class="card-header">
-        <div class="card-icon">🏥</div>
-        <div class="card-title">О нашем учреждении</div>
-    </div>
-    <div class="link-list">
-        <a href="missia.html" class="link-item">Миссия и ценности</a>
-        
-        <!-- Расписание с выпадающим списком -->
-        <div class="link-item dropdown-toggle" onclick="toggleDropdown('schedule', event)">
-            Расписание приёма врачей и кабинетов
+        <div class="card expandable" onclick="toggleCard(this)">
+            <div class="card-header">
+                <div class="card-icon">🏥</div>
+                <div class="card-title">О нашем учреждении</div>
+            </div>
+            <div class="link-list">
+                <a href="missia.html" class="link-item">Миссия и ценности</a>
+                
+                <div class="link-item dropdown-toggle" onclick="toggleDropdown('schedule', event)">
+                    Расписание приёма врачей и кабинетов
+                </div>
+                <div class="dropdown-content" id="dropdown-schedule">
+                    <a href="raspisanie.html" class="dropdown-item">
+                        <span class="dropdown-item-icon">📍</span>
+                        <span class="legal-text">Клинское отделение</span>
+                    </a>
+                    <a href="raspisanie_khimki.html" class="dropdown-item">
+                        <span class="dropdown-item-icon">📍</span>
+                        <span class="legal-text">Химкинское отделение</span>
+                    </a>
+                </div>
+                
+                <div class="link-item dropdown-toggle" onclick="toggleDropdown('history', event)">
+                    История Клинского противотуберкулезного диспансера
+                </div>
+                <div class="dropdown-content" id="dropdown-history">
+                    <a href="https://klinmokptd.github.io/istoricheskaya/" class="dropdown-item">
+                        <span class="dropdown-item-icon">🏥</span>
+                        <span class="legal-text">История Клинского диспансера</span>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <span class="dropdown-item-icon">🏢</span>
+                        <span class="legal-text">История Химкинского диспансера (в разработке)</span>
+                    </a>
+                </div>
+                
+                <a href="https://zdrav.mosreg.ru/start" class="link-item" target="_blank">Запись на приём (онлайн)</a>
+            </div>
         </div>
-        <div class="dropdown-content" id="dropdown-schedule">
-            <a href="raspisanie.html" class="dropdown-item">
-                <span class="dropdown-item-icon">📍</span>
-                <span class="legal-text">Клинское отделение</span>
-            </a>
-            <a href="raspisanie_khimki.html" class="dropdown-item">
-                <span class="dropdown-item-icon">📍</span>
-                <span class="legal-text">Химкинское отделение</span>
-            </a>
-        </div>
-        
-        <!-- История учреждения с выпадающим списком на два подраздела -->
-        <div class="link-item dropdown-toggle" onclick="toggleDropdown('history', event)">
-            История Клинского противотуберкулезного диспансера
-        </div>
-        <div class="dropdown-content" id="dropdown-history">
-            <a href="https://klinmokptd.github.io/istoricheskaya/" class="dropdown-item">
-                <span class="dropdown-item-icon">🏥</span>
-                <span class="legal-text">История Клинского диспансера</span>
-            </a>
-            <a href="#" class="dropdown-item">
-                <span class="dropdown-item-icon">🏢</span>
-                <span class="legal-text">История Химкинского диспансера (в разработке)</span>
-            </a>
-        </div>
-        
-        <a href="https://zdrav.mosreg.ru/start" class="link-item" target="_blank">Запись на приём (онлайн)</a>
-    </div>
-</div>
         
         <!-- О туберкулёзе -->
-        <div class="card" onclick="toggleCard(this)">
+        <div class="card expandable" onclick="toggleCard(this)">
             <div class="card-header">
                 <div class="card-icon">📚</div>
                 <div class="card-title">О туберкулёзе</div>
@@ -696,7 +650,7 @@
         </div>
         
         <!-- Диагностика туберкулеза -->
-        <div class="card" onclick="toggleCard(this)">
+        <div class="card expandable" onclick="toggleCard(this)">
             <div class="card-header">
                 <div class="card-icon">🔬</div>
                 <div class="card-title">Диагностика туберкулеза</div>
@@ -707,7 +661,7 @@
         </div>
         
         <!-- Консервативное лечение -->
-        <div class="card" onclick="toggleCard(this)">
+        <div class="card expandable" onclick="toggleCard(this)">
             <div class="card-header">
                 <div class="card-icon">💊</div>
                 <div class="card-title">Консервативное лечение</div>
@@ -718,8 +672,8 @@
             </div>
         </div>
         
-        <!-- Хирургическое лечение -->
-        <a href="https://klinmokptd.github.io/o_hirurgicheskom_lechenii/" class="card" target="_blank" style="text-decoration: none; display: block;">
+        <!-- Хирургическое лечение (прямая ссылка) -->
+        <a href="https://klinmokptd.github.io/o_hirurgicheskom_lechenii/" class="card card-link" target="_blank">
             <div class="card-header">
                 <div class="card-icon">⚕️</div>
                 <div class="card-title">Хирургическое лечение</div>
@@ -727,7 +681,7 @@
         </a>
         
         <!-- Профилактика и раннее выявление туберкулёза -->
-        <div class="card" onclick="toggleCard(this)">
+        <div class="card expandable" onclick="toggleCard(this)">
             <div class="card-header">
                 <div class="card-icon">🛡️</div>
                 <div class="card-title">Профилактика и раннее выявление туберкулёза</div>
@@ -738,22 +692,21 @@
             </div>
         </div>
         
-        <!-- Частые вопросы -->
-<a href="https://klinmokptd.github.io/faq/" class="card" target="_blank" style="text-decoration: none; display: block;">
-    <div class="card-header">
-        <div class="card-icon">❓</div>
-        <div class="card-title">Частые вопросы</div>
-    </div>
-</a>
+        <!-- Частые вопросы (прямая ссылка) -->
+        <a href="https://klinmokptd.github.io/faq/" class="card card-link" target="_blank">
+            <div class="card-header">
+                <div class="card-icon">❓</div>
+                <div class="card-title">Частые вопросы</div>
+            </div>
+        </a>
         
         <!-- Нормативная база -->
-        <div class="card" onclick="toggleCard(this)">
+        <div class="card expandable" onclick="toggleCard(this)">
             <div class="card-header">
                 <div class="card-icon">⚖️</div>
                 <div class="card-title">Нормативная база</div>
             </div>
             <div class="link-list">
-                <!-- Документ 1: Московская областная программа -->
                 <div class="link-item dropdown-toggle" onclick="toggleDropdown('doc1', event)">
                     Московская областная программа госгарантий
                 </div>
@@ -768,7 +721,6 @@
                     </a>
                 </div>
                 
-                <!-- Документ 2: Федеральная программа -->
                 <div class="link-item dropdown-toggle" onclick="toggleDropdown('doc2', event)">
                     Программа госгарантий Российской Федерации
                 </div>
@@ -783,7 +735,6 @@
                     </a>
                 </div>
                 
-                <!-- Документ 3: ФЗ-323 -->
                 <div class="link-item dropdown-toggle" onclick="toggleDropdown('doc3', event)">
                     ФЗ-323 "Об основах охраны здоровья"
                 </div>
@@ -801,7 +752,7 @@
         </div>
         
         <!-- Обратная связь -->
-        <div class="card" onclick="toggleCard(this)">
+        <div class="card expandable" onclick="toggleCard(this)">
             <div class="card-header">
                 <div class="card-icon">💬</div>
                 <div class="card-title">Обратная связь</div>
@@ -820,28 +771,26 @@
     </footer>
     
     <script>
-        // Функция для раскрытия/скрытия карточек
         function toggleCard(card) {
-            card.classList.toggle('expanded');
+            if (card.classList.contains('expandable')) {
+                card.classList.toggle('expanded');
+            }
         }
         
-        // Функция для открытия/закрытия выпадающих списков в нормативной базе
         function toggleDropdown(id, event) {
-            event.stopPropagation(); // Останавливаем всплытие, чтобы не закрывать карточку
+            event.stopPropagation();
             const dropdown = document.getElementById('dropdown-' + id);
             const toggle = event.currentTarget;
             
             toggle.classList.toggle('expanded');
             dropdown.classList.toggle('show');
             
-            // Закрываем другие открытые dropdown
             document.querySelectorAll('.dropdown-content').forEach(item => {
                 if (item.id !== 'dropdown-' + id && item.classList.contains('show')) {
                     item.classList.remove('show');
                 }
             });
             
-            // Сбрасываем класс expanded у других toggle
             document.querySelectorAll('.dropdown-toggle').forEach(item => {
                 if (item !== toggle && item.classList.contains('expanded')) {
                     item.classList.remove('expanded');
@@ -849,7 +798,6 @@
             });
         }
         
-        // Закрытие dropdown при клике вне их
         document.addEventListener('click', function(e) {
             if (!e.target.classList.contains('dropdown-toggle') && 
                 !e.target.closest('.dropdown-toggle')) {

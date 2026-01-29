@@ -69,20 +69,95 @@
         
         .daisy {
             position: absolute;
-            width: 30px;
-            height: 30px;
-            background: radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, transparent 60%),
-                       repeating-conic-gradient(from 0deg, rgba(255,255,255,0.9) 0deg 15deg, transparent 15deg 30deg);
             border-radius: 50%;
             z-index: -1;
             filter: blur(1px);
+        }
+        
+        /* Более белые кружки */
+        .daisy-1 { 
+            top:20%; left:10%; 
+            width: 30px; height: 30px;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.9) 0%, transparent 60%),
+                       repeating-conic-gradient(from 0deg, rgba(255,255,255,0.95) 0deg 15deg, transparent 15deg 30deg);
+            animation: float 8s ease-in-out infinite;
+            opacity: 0.4;
+        }
+        
+        .daisy-2 { 
+            top:25%; right:15%; 
+            width: 28px; height: 28px;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, transparent 60%),
+                       repeating-conic-gradient(from 0deg, rgba(255,255,255,0.85) 0deg 12deg, transparent 12deg 24deg);
+            animation: float 10s ease-in-out infinite 1s;
+            opacity: 0.35;
+        }
+        
+        .daisy-3 { 
+            bottom:25%; left:15%; 
+            width: 32px; height: 32px;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.7) 0%, transparent 60%);
+            animation: float 12s ease-in-out infinite 2s;
+            opacity: 0.25;
+        }
+        
+        .daisy-4 { 
+            bottom:20%; right:10%; 
+            width: 26px; height: 26px;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.75) 0%, transparent 60%),
+                       repeating-conic-gradient(from 0deg, rgba(255,255,255,0.8) 0deg 10deg, transparent 10deg 20deg);
+            animation: float 9s ease-in-out infinite 3s;
             opacity: 0.3;
         }
         
-        .daisy-1 { top:20%; left:10%; animation: float 8s ease-in-out infinite; }
-        .daisy-2 { top:25%; right:15%; animation: float 10s ease-in-out infinite 1s; opacity:0.25; }
-        .daisy-3 { bottom:25%; left:15%; animation: float 12s ease-in-out infinite 2s; opacity:0.2; }
-        .daisy-4 { bottom:20%; right:10%; animation: float 9s ease-in-out infinite 3s; opacity:0.25; }
+        /* Новые кружки - более полупрозрачные */
+        .daisy-5 { 
+            top:15%; left:25%; 
+            width: 22px; height: 22px;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.6) 0%, transparent 70%);
+            animation: float 7s ease-in-out infinite 0.5s;
+            opacity: 0.2;
+        }
+        
+        .daisy-6 { 
+            top:60%; right:25%; 
+            width: 35px; height: 35px;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.5) 0%, transparent 75%);
+            animation: float 11s ease-in-out infinite 1.5s;
+            opacity: 0.15;
+        }
+        
+        .daisy-7 { 
+            top:40%; left:8%; 
+            width: 20px; height: 20px;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, transparent 65%);
+            animation: float 9s ease-in-out infinite 2.5s;
+            opacity: 0.25;
+        }
+        
+        .daisy-8 { 
+            bottom:35%; right:8%; 
+            width: 25px; height: 25px;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.4) 0%, transparent 80%);
+            animation: float 8s ease-in-out infinite 3.5s;
+            opacity: 0.18;
+        }
+        
+        .daisy-9 { 
+            top:12%; right:35%; 
+            width: 18px; height: 18px;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.7) 0%, transparent 70%);
+            animation: float 13s ease-in-out infinite 4s;
+            opacity: 0.22;
+        }
+        
+        .daisy-10 { 
+            bottom:15%; left:30%; 
+            width: 30px; height: 30px;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.55) 0%, transparent 72%);
+            animation: float 10s ease-in-out infinite 4.5s;
+            opacity: 0.16;
+        }
         
         @keyframes float {
             0%, 100% { transform: translateY(0) rotate(0deg); }
@@ -91,21 +166,22 @@
         
         .header h1 {
             font-size: 2.4rem;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-weight: 800;
+        }
+        
+        .header .subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+            opacity: 0.95;
         }
         
         .header p {
             font-size: 1.1rem;
             opacity: 0.9;
             max-width: 700px;
-            margin: 0 auto 5px;
-        }
-        
-        .header p:last-child {
-            font-size: 1rem;
-            opacity: 0.85;
-            margin-bottom: 0;
+            margin: 0 auto;
         }
         
         /* === CONTACT BLOCK === */
@@ -405,11 +481,21 @@
                 font-size: 1.8rem;
             }
             
+            .header .subtitle {
+                font-size: 1.4rem;
+            }
+            
             .header p {
                 font-size: 1rem;
             }
             
-            .daisy {
+            /* На мобильных оставляем только 4 основных кружка для производительности */
+            .daisy-5,
+            .daisy-6,
+            .daisy-7,
+            .daisy-8,
+            .daisy-9,
+            .daisy-10 {
                 display: none;
             }
             
@@ -479,6 +565,10 @@
                 font-size: 1.6rem;
             }
             
+            .header .subtitle {
+                font-size: 1.2rem;
+            }
+            
             .contact-block {
                 padding: 16px;
             }
@@ -501,14 +591,22 @@
 </head>
 <body>
     <header class="header">
+        <!-- Декоративные кружки (10 штук) -->
         <div class="daisy daisy-1"></div>
         <div class="daisy daisy-2"></div>
         <div class="daisy daisy-3"></div>
         <div class="daisy daisy-4"></div>
+        <div class="daisy daisy-5"></div>
+        <div class="daisy daisy-6"></div>
+        <div class="daisy daisy-7"></div>
+        <div class="daisy daisy-8"></div>
+        <div class="daisy daisy-9"></div>
+        <div class="daisy daisy-10"></div>
         
-        <h1>Навигатор пациента</h1>
-        <p>ГБУЗ МО МОКПТД филиал Клинский</p>
-        <p>Вся важная информация в одном месте</p>
+        <!-- Текст заголовка в новом порядке -->
+        <h1>ГБУЗ МО МОКПТД филиал Клинский</h1>
+        <div class="subtitle">Навигатор пациента</div>
+        <p>Помогает понять диагностику и лечение, следить за их этапами и выполнять всё правильно.</p>
     </header>
     
     <div class="contact-block">
@@ -560,13 +658,13 @@
             </div>
         </div>
         
-                <!-- Как мы улучшаем качество нашей работы вместе с вами (прямая ссылка) -->
-<a href="kachestvo_vmeste.html" class="card card-link">
-    <div class="card-header">
-        <div class="card-icon">🤝</div>
-        <div class="card-title">Как мы улучшаем качество нашей работы вместе с вами</div>
-    </div>
-</a>
+        <!-- Как мы улучшаем качество нашей работы вместе с вами (прямая ссылка) -->
+        <a href="kachestvo_vmeste.html" class="card card-link">
+            <div class="card-header">
+                <div class="card-icon">🤝</div>
+                <div class="card-title">Как мы улучшаем качество нашей работы вместе с вами</div>
+            </div>
+        </a>
         
         <!-- Диагностика туберкулеза -->
         <div class="card expandable" onclick="toggleCard(this)">

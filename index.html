@@ -6,6 +6,7 @@
     <title>Навигатор пациента | ГБУЗ МО МОКПТД филиал Клинский</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
+        /* === RESET & GLOBAL === */
         * {
             margin: 0;
             padding: 0;
@@ -23,11 +24,12 @@
             --surface: #F9F9F9;
             --border: #E0E0E0;
             --error: #D32F2F;
-            --warning: #FF9800;
-            --accent-blue: #1976D2;
-            --accent-red: #D32F2F;
             --telegram-blue: #2AABEE;
             --max-purple: #7B61FF;
+            --phone-red: #D32F2F;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
         }
         
         body {
@@ -43,12 +45,12 @@
         .header {
             position: relative;
             text-align: center;
-            padding: 50px 20px;
+            padding: 40px 20px;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
-            border-radius: 20px;
+            border-radius: 16px;
             margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            box-shadow: var(--shadow-lg);
             overflow: hidden;
             z-index: 1;
         }
@@ -60,307 +62,203 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                radial-gradient(circle at 15% 20%, rgba(255,255,255,0.12) 2%, transparent 3%),
-                radial-gradient(circle at 25% 45%, rgba(255,255,255,0.1) 2.5%, transparent 3.5%),
-                radial-gradient(circle at 10% 75%, rgba(255,255,255,0.15) 1.8%, transparent 2.8%),
-                radial-gradient(circle at 85% 25%, rgba(255,255,255,0.1) 2.2%, transparent 3.2%),
-                radial-gradient(circle at 90% 60%, rgba(255,255,255,0.13) 2.4%, transparent 3.4%),
-                radial-gradient(circle at 80% 85%, rgba(255,255,255,0.08) 1.5%, transparent 2.5%),
-                radial-gradient(circle at 50% 35%, rgba(255,255,255,0.06) 3%, transparent 4%),
-                radial-gradient(circle at 40% 65%, rgba(255,255,255,0.07) 2%, transparent 3%),
-                radial-gradient(circle at 60% 50%, rgba(255,255,255,0.05) 2.5%, transparent 3.5%);
-            background-size: 100% 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                       radial-gradient(circle at 80% 70%, rgba(255,255,255,0.08) 0%, transparent 50%);
             z-index: -1;
-            opacity: 0.7;
-        }
-        
-        .header::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='white' stroke-width='0.8' stroke-opacity='0.3'%3E%3Ccircle cx='30' cy='30' r='8'/%3E%3Cpath d='M30,22 L30,38 M22,30 L38,30 M25,25 L35,35 M25,35 L35,25'/%3E%3C/g%3E%3C/svg%3E"),
-                url("data:image/svg+xml,%3Csvg width='50' height='50' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='white' stroke-width='0.7' stroke-opacity='0.25'%3E%3Ccircle cx='25' cy='25' r='6'/%3E%3Cpath d='M25,19 L25,31 M19,25 L31,25 M21,21 L29,29 M21,29 L29,21'/%3E%3C/g%3E%3C/svg%3E"),
-                url("data:image/svg+xml,%3Csvg width='70' height='70' viewBox='0 0 70 70' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='white' stroke-width='1' stroke-opacity='0.2'%3E%3Ccircle cx='35' cy='35' r='10'/%3E%3Cpath d='M35,25 L35,45 M25,35 L45,35 M28,28 L42,42 M28,42 L42,28'/%3E%3C/g%3E%3C/svg%3E"),
-                url("data:image/svg+xml,%3Csvg width='45' height='45' viewBox='0 0 45 45' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='white' stroke-width='0.6' stroke-opacity='0.3'%3E%3Ccircle cx='22.5' cy='22.5' r='5.5'/%3E%3Cpath d='M22.5,17 L22.5,28 M17,22.5 L28,22.5 M19,19 L26,26 M19,26 L26,19'/%3E%3C/g%3E%3C/svg%3E");
-            background-position: 
-                20px 20px,
-                calc(100% - 20px) 20px,
-                20px calc(100% - 20px),
-                calc(100% - 20px) calc(100% - 20px);
-            background-repeat: no-repeat;
-            z-index: -1;
-            opacity: 0.6;
         }
         
         .daisy {
             position: absolute;
-            width: 40px;
-            height: 40px;
-            background: 
-                radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, transparent 60%),
-                repeating-conic-gradient(
-                    from 0deg,
-                    rgba(255,255,255,0.9) 0deg 15deg,
-                    transparent 15deg 30deg
-                );
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, transparent 60%),
+                       repeating-conic-gradient(from 0deg, rgba(255,255,255,0.9) 0deg 15deg, transparent 15deg 30deg);
             border-radius: 50%;
             z-index: -1;
             filter: blur(1px);
-            opacity: 0.4;
-        }
-        
-        .daisy-1 {
-            top: 15%;
-            left: 10%;
-            width: 35px;
-            height: 35px;
-            transform: rotate(20deg);
-            animation: float 8s ease-in-out infinite;
-        }
-        
-        .daisy-2 {
-            top: 25%;
-            right: 15%;
-            width: 45px;
-            height: 45px;
-            transform: rotate(-15deg);
-            opacity: 0.35;
-            animation: float 10s ease-in-out infinite 1s;
-        }
-        
-        .daisy-3 {
-            bottom: 20%;
-            left: 15%;
-            width: 30px;
-            height: 30px;
-            opacity: 0.5;
-            animation: float 12s ease-in-out infinite 2s;
-        }
-        
-        .daisy-4 {
-            bottom: 30%;
-            right: 8%;
-            width: 40px;
-            height: 40px;
-            transform: rotate(30deg);
             opacity: 0.3;
-            animation: float 9s ease-in-out infinite 3s;
         }
+        
+        .daisy-1 { top:20%; left:10%; animation: float 8s ease-in-out infinite; }
+        .daisy-2 { top:25%; right:15%; animation: float 10s ease-in-out infinite 1s; opacity:0.25; }
+        .daisy-3 { bottom:25%; left:15%; animation: float 12s ease-in-out infinite 2s; opacity:0.2; }
+        .daisy-4 { bottom:20%; right:10%; animation: float 9s ease-in-out infinite 3s; opacity:0.25; }
         
         @keyframes float {
-            0%, 100% {
-                transform: translateY(0px) rotate(var(--r-start, 0deg));
-            }
-            50% {
-                transform: translateY(-10px) rotate(var(--r-end, 10deg));
-            }
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(5deg); }
         }
         
-        .daisy-1 { --r-start: 20deg; --r-end: 25deg; }
-        .daisy-2 { --r-start: -15deg; --r-end: -10deg; }
-        .daisy-4 { --r-start: 30deg; --r-end: 35deg; }
-        
         .header h1 {
-            font-size: 2.8rem;
-            margin-bottom: 15px;
+            font-size: 2.4rem;
+            margin-bottom: 10px;
             font-weight: 800;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            position: relative;
-            z-index: 2;
         }
         
         .header p {
-            font-size: 1.2rem;
-            opacity: 0.95;
+            font-size: 1.1rem;
+            opacity: 0.9;
             max-width: 700px;
-            margin: 0 auto 10px;
-            position: relative;
-            z-index: 2;
+            margin: 0 auto 5px;
         }
         
         .header p:last-child {
+            font-size: 1rem;
+            opacity: 0.85;
             margin-bottom: 0;
-            font-size: 1.1rem;
-            opacity: 0.9;
         }
         
-        /* CONTACT BLOCK */
+        /* === CONTACT BLOCK === */
         .contact-block {
             background: white;
-            padding: 35px;
-            border-radius: 16px;
+            padding: 25px;
+            border-radius: 14px;
             margin: 30px 0;
             text-align: center;
-            border: 3px solid var(--primary);
-            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.15);
+            border: 2px solid var(--primary);
+            box-shadow: var(--shadow-md);
         }
         
         .contact-text {
-            font-size: 1.6rem;
+            font-size: 1.3rem;
             color: var(--primary);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             line-height: 1.5;
-            font-weight: 800;
-            text-align: center;
-            text-shadow: 0 2px 4px rgba(46, 125, 50, 0.2);
-            letter-spacing: 0.5px;
+            font-weight: 700;
         }
         
         .contact-name {
-            font-size: 1.5rem;
-            color: var(--text-light);
-            font-weight: 700;
-            margin: 20px 0 8px 0;
+            font-size: 1.3rem;
+            color: var(--text);
+            font-weight: 600;
+            margin: 15px 0 5px 0;
         }
         
         .contact-position {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: var(--text-light);
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             font-weight: 500;
         }
         
-        /* Три кнопки для связи */
         .contact-buttons {
             display: flex;
             justify-content: center;
             gap: 15px;
             flex-wrap: wrap;
-            margin-top: 25px;
+            margin-top: 20px;
         }
         
         .contact-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            background: linear-gradient(135deg, var(--accent-red) 0%, #D50000 100%);
+            gap: 10px;
             color: white;
-            font-size: 1.3rem;
-            font-weight: 700;
-            padding: 18px 30px;
-            border-radius: 60px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 14px 24px;
+            border-radius: 50px;
             text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 18px rgba(211, 47, 47, 0.25);
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            min-width: 200px;
+            transition: all 0.2s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            min-width: 180px;
+            text-align: center;
         }
         
         .contact-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 28px rgba(211, 47, 47, 0.35);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
         }
         
         .contact-btn:active {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 22px rgba(211, 47, 47, 0.3);
+            transform: translateY(-1px);
         }
         
-        /* Цвета для кнопок */
         .contact-btn.phone {
-            background: linear-gradient(135deg, var(--accent-red) 0%, #D50000 100%);
-            box-shadow: 0 6px 18px rgba(211, 47, 47, 0.25);
+            background: linear-gradient(135deg, var(--phone-red) 0%, #B71C1C 100%);
+            box-shadow: 0 4px 12px rgba(211, 47, 47, 0.2);
         }
         
         .contact-btn.telegram {
-            background: linear-gradient(135deg, var(--telegram-blue) 0%, #229ED9 100%);
-            box-shadow: 0 6px 18px rgba(42, 171, 238, 0.25);
-        }
-        
-        .contact-btn.telegram:hover {
-            box-shadow: 0 12px 28px rgba(42, 171, 238, 0.35);
+            background: linear-gradient(135deg, var(--telegram-blue) 0%, #1E88E5 100%);
+            box-shadow: 0 4px 12px rgba(42, 171, 238, 0.2);
         }
         
         .contact-btn.max {
-            background: linear-gradient(135deg, var(--max-purple) 0%, #5A3FFF 100%);
-            box-shadow: 0 6px 18px rgba(123, 97, 255, 0.25);
-        }
-        
-        .contact-btn.max:hover {
-            box-shadow: 0 12px 28px rgba(123, 97, 255, 0.35);
+            background: linear-gradient(135deg, var(--max-purple) 0%, #4527A0 100%);
+            box-shadow: 0 4px 12px rgba(123, 97, 255, 0.2);
         }
         
         .contact-btn .icon {
-            font-size: 1.8rem;
+            font-size: 1.3rem;
+            flex-shrink: 0;
         }
         
         .contact-btn .label {
             white-space: nowrap;
         }
         
-        /* GRID & CARDS */
+        /* === GRID & CARDS === */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin: 40px 0;
+            gap: 20px;
+            margin: 30px 0;
         }
         
         .card {
             background: var(--background);
             border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
             border: 1px solid var(--border);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            height: auto;
+            transition: all 0.25s ease;
             cursor: pointer;
             text-decoration: none !important;
         }
         
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
         }
         
         .card-header {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
         .card-icon {
-            font-size: 2.5rem;
-            margin-right: 15px;
+            font-size: 2rem;
+            margin-right: 12px;
             color: var(--primary);
         }
         
         .card-title {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--primary);
             font-weight: 600;
             flex-grow: 1;
-            text-decoration: none !important;
         }
         
-        /* Стрелочка для раскрытия карточки (только для карточек со списками) */
+        /* Expandable cards */
         .card.expandable .card-header::after {
             content: '▼';
             color: var(--text-light);
-            font-size: 0.9rem;
-            transition: transform 0.3s ease;
-            margin-left: 10px;
+            font-size: 0.8rem;
+            transition: transform 0.25s ease;
+            margin-left: 8px;
         }
         
         .card.expandable.expanded .card-header::after {
             transform: rotate(180deg);
         }
         
-        /* Стрелочка-ссылка ↗ для карточек-ссылок (прямые ссылки) */
-        .card-link .card {
-            text-decoration: none !important;
-        }
-        
+        /* Link cards */
         .card-link .card-title {
             position: relative;
-            padding-right: 25px;
-            text-decoration: none !important;
+            padding-right: 20px;
         }
         
         .card-link .card-title::after {
@@ -368,21 +266,22 @@
             position: absolute;
             right: 0;
             top: 0;
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--primary);
             font-weight: 600;
             transition: transform 0.2s ease;
         }
         
         .card-link:hover .card-title::after {
-            transform: translate(3px, -3px);
+            transform: translate(2px, -2px);
         }
         
+        /* Link lists */
         .link-list {
             list-style: none;
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s ease;
+            transition: max-height 0.3s ease;
         }
         
         .card.expanded .link-list {
@@ -391,75 +290,73 @@
         
         .link-item {
             display: block;
-            padding: 12px 15px;
-            margin-bottom: 10px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
             background: var(--surface);
             border-radius: 8px;
             text-decoration: none;
             color: var(--text);
-            border-left: 4px solid var(--primary);
-            transition: all 0.2s ease;
+            border-left: 3px solid var(--primary);
+            transition: all 0.15s ease;
+            font-size: 0.95rem;
         }
         
         .link-item:hover {
             background: var(--primary-light);
-            padding-left: 20px;
+            padding-left: 16px;
             color: var(--primary);
         }
         
-        /* СТРЕЛОЧКА ВНИЗ для выпадающих списков */
+        /* Dropdowns */
         .dropdown-toggle {
             cursor: pointer;
             position: relative;
-            padding-right: 40px;
+            padding-right: 36px;
         }
         
         .dropdown-toggle::after {
             content: '▼';
             position: absolute;
-            right: 15px;
+            right: 12px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-light);
-            transition: transform 0.3s ease;
+            transition: transform 0.25s ease;
         }
         
         .dropdown-toggle.expanded::after {
             transform: translateY(-50%) rotate(180deg);
         }
         
-        .dropdown-toggle:hover::after {
-            color: var(--primary);
-        }
-        
         .dropdown-content {
             display: none;
             background: white;
             border-radius: 8px;
-            margin: 8px 0 12px 15px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            margin: 6px 0 10px 12px;
+            box-shadow: var(--shadow-sm);
             border: 1px solid var(--border);
             overflow: hidden;
         }
         
         .dropdown-content.show {
             display: block;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.2s ease;
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
+            from { opacity: 0; transform: translateY(-6px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
         .dropdown-item {
             display: block;
-            padding: 12px 16px;
+            padding: 10px 14px;
             text-decoration: none;
             color: var(--text);
             border-bottom: 1px solid var(--border);
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
+            font-size: 0.9rem;
         }
         
         .dropdown-item:last-child {
@@ -469,51 +366,47 @@
         .dropdown-item:hover {
             background: var(--primary-light);
             color: var(--primary);
-            padding-left: 20px;
+            padding-left: 18px;
         }
         
         .dropdown-item-icon {
-            margin-right: 10px;
-            font-size: 0.9rem;
+            margin-right: 8px;
+            font-size: 0.85rem;
         }
         
-        .legal-text {
-            font-size: 0.95rem;
-            color: var(--text);
-        }
-        
-        .explanation-text {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            font-style: italic;
-        }
-        
-        /* FOOTER */
+        /* === FOOTER === */
         .footer {
             text-align: center;
-            padding: 30px;
-            margin-top: 50px;
+            padding: 25px;
+            margin-top: 40px;
             color: var(--text-light);
             border-top: 1px solid var(--border);
+            font-size: 0.9rem;
         }
         
-        /* RESPONSIVE */
+        .footer p:last-child {
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+        
+        /* === RESPONSIVE === */
         @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            .header {
+                padding: 30px 15px;
+                border-radius: 14px;
+            }
+            
             .header h1 {
-                font-size: 2.2rem;
+                font-size: 1.8rem;
             }
             
             .header p {
-                font-size: 1.1rem;
-            }
-            
-            .header::before {
-                opacity: 0.5;
-            }
-            
-            .header::after {
-                background-size: 40px 40px;
-                opacity: 0.4;
+                font-size: 1rem;
             }
             
             .daisy {
@@ -522,60 +415,85 @@
             
             .grid {
                 grid-template-columns: 1fr;
+                gap: 16px;
             }
             
             .card {
-                padding: 20px;
+                padding: 16px;
+            }
+            
+            .card-title {
+                font-size: 1.2rem;
+            }
+            
+            .card-icon {
+                font-size: 1.8rem;
             }
             
             .contact-block {
-                padding: 25px;
+                padding: 20px;
+                margin: 25px 0;
             }
             
             .contact-text {
-                font-size: 1.3rem;
-                font-weight: 800;
+                font-size: 1.1rem;
+                margin-bottom: 12px;
+            }
+            
+            .contact-name {
+                font-size: 1.2rem;
+                margin: 12px 0 4px 0;
+            }
+            
+            .contact-position {
+                font-size: 0.95rem;
+                margin-bottom: 18px;
             }
             
             .contact-buttons {
                 flex-direction: column;
                 align-items: center;
-            }
-            
-            .contact-btn {
-                min-width: 250px;
-                width: 100%;
-                max-width: 300px;
-                padding: 16px 24px;
-                font-size: 1.2rem;
-            }
-            
-            .contact-name {
-                font-size: 1.3rem;
-            }
-            
-            .contact-position {
-                font-size: 1.1rem;
-            }
-            
-            .card-title {
-                font-size: 1.3rem;
-            }
-            
-            .card-link .card-title::after {
-                font-size: 1rem;
-            }
-        }
-        
-        @media (max-width: 400px) {
-            .header h1 {
-                font-size: 1.8rem;
+                gap: 10px;
+                margin-top: 18px;
             }
             
             .contact-btn {
                 min-width: 100%;
-                max-width: 100%;
-                padding: 14px 20px;
+                max-width: 260px;
+                padding: 10px 16px;
+                font-size: 1rem;
+                border-radius: 45px;
+            }
+            
+            .contact-btn .icon {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .header {
+                padding: 25px 12px;
+            }
+            
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .contact-block {
+                padding: 16px;
+            }
+            
+            .contact-btn {
+                padding: 9px 14px;
+                font-size: 0.95rem;
+                max-width: 240px;
+            }
+            
+            .card {
+                padding: 14px;
+            }
+            
+            .card-title {
                 font-size: 1.1rem;
             }
         }
@@ -630,11 +548,11 @@
                 <div class="dropdown-content" id="dropdown-history">
                     <a href="https://klinmokptd.github.io/istoricheskaya/" class="dropdown-item">
                         <span class="dropdown-item-icon">🏥</span>
-                        <span class="legal-text">История Клинского диспансера</span>
+                        <span>История Клинского диспансера</span>
                     </a>
                     <a href="#" class="dropdown-item">
                         <span class="dropdown-item-icon">🏢</span>
-                        <span class="legal-text">История Химкинского диспансера (в разработке)</span>
+                        <span>История Химкинского диспансера (в разработке)</span>
                     </a>
                 </div>
                 
@@ -718,11 +636,11 @@
                 <div class="dropdown-content" id="dropdown-doc1">
                     <a href="http://publication.pravo.gov.ru/document/5000202601200001" class="dropdown-item" target="_blank">
                         <span class="dropdown-item-icon">📄</span>
-                        <span class="legal-text">Ссылка на официальный документ</span>
+                        <span>Ссылка на официальный документ</span>
                     </a>
                     <a href="fz323.html" class="dropdown-item">
                         <span class="dropdown-item-icon">💡</span>
-                        <span class="explanation-text">Разъяснения простыми словами</span>
+                        <span>Разъяснения простыми словами</span>
                     </a>
                 </div>
                 
@@ -732,11 +650,11 @@
                 <div class="dropdown-content" id="dropdown-doc2">
                     <a href="http://actual.pravo.gov.ru/content/content.html#pnum=0001202512300036" class="dropdown-item" target="_blank">
                         <span class="dropdown-item-icon">📄</span>
-                        <span class="legal-text">Ссылка на официальный документ</span>
+                        <span>Ссылка на официальный документ</span>
                     </a>
                     <a href="fz323.html" class="dropdown-item">
                         <span class="dropdown-item-icon">💡</span>
-                        <span class="explanation-text">Разъяснения простыми словами</span>
+                        <span>Разъяснения простыми словами</span>
                     </a>
                 </div>
                 
@@ -746,11 +664,11 @@
                 <div class="dropdown-content" id="dropdown-doc3">
                     <a href="fz323zakon.html" class="dropdown-item">
                         <span class="dropdown-item-icon">📄</span>
-                        <span class="legal-text">Основной документ</span>
+                        <span>Основной документ</span>
                     </a>
                     <a href="fz323.html" class="dropdown-item">
                         <span class="dropdown-item-icon">💡</span>
-                        <span class="explanation-text">Разъяснения простыми словами</span>
+                        <span>Разъяснения простыми словами</span>
                     </a>
                 </div>
             </div>
@@ -770,9 +688,7 @@
     
     <footer class="footer">
         <p>© 2026 ГБУЗ МО МОКПТД филиал Клинский</p>
-        <p style="margin-top: 10px; font-size: 0.9rem; color: #888;">
-            Данный навигатор создан для удобства пациентов. Информация носит справочный характер.
-        </p>
+        <p>Данный навигатор создан для удобства пациентов. Информация носит справочный характер.</p>
     </footer>
     
     <script>
